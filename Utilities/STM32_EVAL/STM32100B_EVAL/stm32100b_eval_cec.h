@@ -17,8 +17,8 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32100B_EVAL_CEC_H
@@ -29,7 +29,7 @@ extern "C"
 {
 #endif
 
-  /* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
 
 /** @addtogroup Utilities
@@ -38,11 +38,11 @@ extern "C"
 
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32100B_EVAL
   * @{
-  */  
+  */
 
 /** @defgroup STM32100B_EVAL_CEC
   * @{
@@ -53,27 +53,27 @@ extern "C"
   */
 typedef enum
 {
-  HDMI_CEC_BIT_TIMING              = (1), /*!< CEC Bit Timing Error */
-  HDMI_CEC_BIT_PERIOD              = (2), /*!< CEC Bit Period Error */
-  HDMI_CEC_RX_BLOCK_FINISHED       = (3), /*!< CEC Receive Block finished Error */
-  HDMI_CEC_START_BIT               = (4), /*!< CEC Start Bit Error */
-  HDMI_CEC_BLOCK_ACKNOWLEDGE       = (5), /*!< CEC Block Acknowledge Error */
-  HDMI_CEC_LINE                    = (6), /*!< CEC Line Error */
-  HDMI_CEC_TX_BLOCK_FINISHED       = (7), /*!< CEC Transmit Block Transfer finished Error */
-  HDMI_CEC_DEVICE_UNREGISTRED      = (8), /*!< CEC Device Unregistred */
-  HDMI_CEC_TIMEOUT                 = (9), /*!< CEC TimeOut */
-  HDMI_CEC_OK                      = (10)  /*!< CEC OK */
-}HDMI_CEC_Error;
+    HDMI_CEC_BIT_TIMING              = ( 1 ), /*!< CEC Bit Timing Error */
+    HDMI_CEC_BIT_PERIOD              = ( 2 ), /*!< CEC Bit Period Error */
+    HDMI_CEC_RX_BLOCK_FINISHED       = ( 3 ), /*!< CEC Receive Block finished Error */
+    HDMI_CEC_START_BIT               = ( 4 ), /*!< CEC Start Bit Error */
+    HDMI_CEC_BLOCK_ACKNOWLEDGE       = ( 5 ), /*!< CEC Block Acknowledge Error */
+    HDMI_CEC_LINE                    = ( 6 ), /*!< CEC Line Error */
+    HDMI_CEC_TX_BLOCK_FINISHED       = ( 7 ), /*!< CEC Transmit Block Transfer finished Error */
+    HDMI_CEC_DEVICE_UNREGISTRED      = ( 8 ), /*!< CEC Device Unregistred */
+    HDMI_CEC_TIMEOUT                 = ( 9 ), /*!< CEC TimeOut */
+    HDMI_CEC_OK                      = ( 10 ) /*!< CEC OK */
+} HDMI_CEC_Error;
 
 typedef struct
 {
-  __IO uint8_t PhysicalAddress_A;
-  __IO uint8_t PhysicalAddress_B;
-  __IO uint8_t PhysicalAddress_C;
-  __IO uint8_t PhysicalAddress_D;
-  __IO uint8_t LogicalAddress;
-  __IO uint8_t DeviceType;
-}HDMI_CEC_Map;
+    __IO uint8_t PhysicalAddress_A;
+    __IO uint8_t PhysicalAddress_B;
+    __IO uint8_t PhysicalAddress_C;
+    __IO uint8_t PhysicalAddress_D;
+    __IO uint8_t LogicalAddress;
+    __IO uint8_t DeviceType;
+} HDMI_CEC_Map;
 
 
 #define HDMI_CEC_TX_MESSAGE_LENGTH_MAX       ((uint32_t)0x0000000E)
@@ -84,12 +84,12 @@ typedef struct
 */
 typedef struct
 {
-  __IO uint8_t Header;
-  __IO uint8_t Opcode;
-  __IO uint8_t Operande[HDMI_CEC_TX_MESSAGE_LENGTH_MAX];
-  __IO uint8_t TxMessageLength;
-  __IO uint8_t RxMessageLength;
-}HDMI_CEC_Message;
+    __IO uint8_t Header;
+    __IO uint8_t Opcode;
+    __IO uint8_t Operande[HDMI_CEC_TX_MESSAGE_LENGTH_MAX];
+    __IO uint8_t TxMessageLength;
+    __IO uint8_t RxMessageLength;
+} HDMI_CEC_Message;
 
 /**
 * @}
@@ -139,18 +139,18 @@ typedef struct
 /**
   * @brief  HDMI CEC Root (Mainly for TV with a fixed physical address (0.0.0.0))
   *         If you want to configure the STM32100B-EVAL board as CEC Root (Sink)
-  *         change the following define to 0x1    
+  *         change the following define to 0x1
   */
 #define HDMI_CEC_ROOT                                       0x00
 
 /**
   * @brief  To select if the DDC Channel will be used for physical address discovery
   *         or not. To use the DDC Channel to read the EDID structure uncomment
-  *         the following line.   
+  *         the following line.
   *         If the device is configured as HMDI source it should read his own physical
-  *         address from the sink that is connected to.         
+  *         address from the sink that is connected to.
   */
-/* #define HDMI_CEC_USE_DDC */                                    
+/* #define HDMI_CEC_USE_DDC */
 
 /**
   * @brief  CEC version: V1.3a
@@ -252,13 +252,13 @@ typedef struct
 /** @defgroup STM32100B_EVAL_CEC_Exported_Functions
   * @{
   */
-HDMI_CEC_Error HDMI_CEC_Init(void);
-HDMI_CEC_Error HDMI_CEC_TransmitMessage(HDMI_CEC_Message *HDMI_CEC_TX_MessageStructure);
-HDMI_CEC_Error HDMI_CEC_GetErrorStatus (void);
-void HDMI_CEC_ProcessIRQSrc(void);
-HDMI_CEC_Error HDMI_CEC_ReportPhysicalAddress(void);
-void HDMI_CEC_CommandCallBack(void);
-HDMI_CEC_Error HDMI_CEC_CheckConnectedDevices(void);
+HDMI_CEC_Error HDMI_CEC_Init( void );
+HDMI_CEC_Error HDMI_CEC_TransmitMessage( HDMI_CEC_Message *HDMI_CEC_TX_MessageStructure );
+HDMI_CEC_Error HDMI_CEC_GetErrorStatus( void );
+void HDMI_CEC_ProcessIRQSrc( void );
+HDMI_CEC_Error HDMI_CEC_ReportPhysicalAddress( void );
+void HDMI_CEC_CommandCallBack( void );
+HDMI_CEC_Error HDMI_CEC_CheckConnectedDevices( void );
 
 #ifdef __cplusplus
 }
@@ -285,6 +285,6 @@ HDMI_CEC_Error HDMI_CEC_CheckConnectedDevices(void);
 /**
   * @}
   */
-  
+
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
 

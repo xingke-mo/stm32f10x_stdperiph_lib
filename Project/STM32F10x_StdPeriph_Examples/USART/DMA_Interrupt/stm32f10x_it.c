@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/DMA_Interrupt/stm32f10x_it.c 
+  * @file    USART/DMA_Interrupt/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup USART_DMA_Interrupt
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -52,7 +52,7 @@ extern uint8_t NbrOfDataToRead;
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -61,12 +61,12 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -74,12 +74,12 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -87,12 +87,12 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -100,12 +100,12 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -113,7 +113,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -122,7 +122,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -131,7 +131,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -140,7 +140,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -153,19 +153,19 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void USART2_IRQHandler(void)
+void USART2_IRQHandler( void )
 {
-  if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
-  {
-    /* Read one byte from the receive data register */
-    RxBuffer2[RxCounter++] = USART_ReceiveData(USART2);
-
-    if(RxCounter == NbrOfDataToRead)
+    if( USART_GetITStatus( USART2, USART_IT_RXNE ) != RESET )
     {
-      /* Disable the USART2 Receive interrupt */
-      USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
+        /* Read one byte from the receive data register */
+        RxBuffer2[RxCounter++] = USART_ReceiveData( USART2 );
+
+        if( RxCounter == NbrOfDataToRead )
+        {
+            /* Disable the USART2 Receive interrupt */
+            USART_ITConfig( USART2, USART_IT_RXNE, DISABLE );
+        }
     }
-  }
 }
 
 /**
@@ -173,19 +173,19 @@ void USART2_IRQHandler(void)
   * @param  None
   * @retval None
   */
-void USART3_IRQHandler(void)
+void USART3_IRQHandler( void )
 {
-  if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
-  {
-    /* Read one byte from the receive data register */
-    RxBuffer2[RxCounter++] = USART_ReceiveData(USART3);
-
-    if(RxCounter == NbrOfDataToRead)
+    if( USART_GetITStatus( USART3, USART_IT_RXNE ) != RESET )
     {
-      /* Disable the USART3 Receive interrupt */
-      USART_ITConfig(USART3, USART_IT_RXNE, DISABLE);
+        /* Read one byte from the receive data register */
+        RxBuffer2[RxCounter++] = USART_ReceiveData( USART3 );
+
+        if( RxCounter == NbrOfDataToRead )
+        {
+            /* Disable the USART3 Receive interrupt */
+            USART_ITConfig( USART3, USART_IT_RXNE, DISABLE );
+        }
     }
-  }
 }
 
 /******************************************************************************/
@@ -206,10 +206,10 @@ void USART3_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

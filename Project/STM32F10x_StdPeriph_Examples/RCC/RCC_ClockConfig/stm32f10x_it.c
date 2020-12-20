@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RCC/RCC_ClockConfig/stm32f10x_it.c 
+  * @file    RCC/RCC_ClockConfig/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -31,7 +31,7 @@
 
 /** @addtogroup RCC_ClockConfig
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -49,37 +49,38 @@
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
-  /* This interrupt is generated when HSE clock fails */
+    /* This interrupt is generated when HSE clock fails */
 
-  if (RCC_GetITStatus(RCC_IT_CSS) != RESET)
-  {/* At this stage: HSE, PLL are disabled (but no change on PLL config) and HSI
-       is selected as system clock source */
+    if( RCC_GetITStatus( RCC_IT_CSS ) != RESET )
+    {
+        /* At this stage: HSE, PLL are disabled (but no change on PLL config) and HSI
+            is selected as system clock source */
 
-    /* Enable HSE */
-    RCC_HSEConfig(RCC_HSE_ON);
+        /* Enable HSE */
+        RCC_HSEConfig( RCC_HSE_ON );
 
-    /* Enable HSE Ready interrupt */
-    RCC_ITConfig(RCC_IT_HSERDY, ENABLE);
+        /* Enable HSE Ready interrupt */
+        RCC_ITConfig( RCC_IT_HSERDY, ENABLE );
 
 #ifndef SYSCLK_HSE
- #ifdef STM32F10X_CL
-    /* Enable PLL and PLL2 Ready interrupts */
-    RCC_ITConfig(RCC_IT_PLLRDY | RCC_IT_PLL2RDY, ENABLE);
- #else
-    /* Enable PLL Ready interrupt */
-    RCC_ITConfig(RCC_IT_PLLRDY, ENABLE);
- #endif	/* STM32F10X_CL */
+#ifdef STM32F10X_CL
+        /* Enable PLL and PLL2 Ready interrupts */
+        RCC_ITConfig( RCC_IT_PLLRDY | RCC_IT_PLL2RDY, ENABLE );
+#else
+        /* Enable PLL Ready interrupt */
+        RCC_ITConfig( RCC_IT_PLLRDY, ENABLE );
+#endif /* STM32F10X_CL */
 #endif /* SYSCLK_HSE */
 
-    /* Clear Clock Security System interrupt pending bit */
-    RCC_ClearITPendingBit(RCC_IT_CSS);
+        /* Clear Clock Security System interrupt pending bit */
+        RCC_ClearITPendingBit( RCC_IT_CSS );
 
-    /* Once HSE clock recover, the HSERDY interrupt is generated and in the RCC ISR
-       routine the system clock will be reconfigured to its previous state (before
-       HSE clock failure) */
-  }
+        /* Once HSE clock recover, the HSERDY interrupt is generated and in the RCC ISR
+           routine the system clock will be reconfigured to its previous state (before
+           HSE clock failure) */
+    }
 }
 
 /**
@@ -87,12 +88,12 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -100,12 +101,12 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -113,12 +114,12 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -126,12 +127,12 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -139,7 +140,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -148,7 +149,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -157,7 +158,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -166,7 +167,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -175,58 +176,60 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles RCC interrupt request. 
+  * @brief  This function handles RCC interrupt request.
   * @param  None
   * @retval None
   */
-void RCC_IRQHandler(void)
+void RCC_IRQHandler( void )
 {
-  if(RCC_GetITStatus(RCC_IT_HSERDY) != RESET)
-  { 
-    /* Clear HSERDY interrupt pending bit */
-    RCC_ClearITPendingBit(RCC_IT_HSERDY);
+    if( RCC_GetITStatus( RCC_IT_HSERDY ) != RESET )
+    {
+        /* Clear HSERDY interrupt pending bit */
+        RCC_ClearITPendingBit( RCC_IT_HSERDY );
 
-    /* Check if the HSE clock is still available */
-    if (RCC_GetFlagStatus(RCC_FLAG_HSERDY) != RESET)
-    { 
+        /* Check if the HSE clock is still available */
+        if( RCC_GetFlagStatus( RCC_FLAG_HSERDY ) != RESET )
+        {
 #ifdef SYSCLK_HSE
-      /* Select HSE as system clock source */
-      RCC_SYSCLKConfig(RCC_SYSCLKSource_HSE);
+            /* Select HSE as system clock source */
+            RCC_SYSCLKConfig( RCC_SYSCLKSource_HSE );
 #else
- #ifdef STM32F10X_CL
-      /* Enable PLL2 */
-      RCC_PLL2Cmd(ENABLE);
- #else
-      /* Enable PLL: once the PLL is ready the PLLRDY interrupt is generated */ 
-      RCC_PLLCmd(ENABLE);
- #endif	/* STM32F10X_CL */
-#endif /* SYSCLK_HSE */      
+#ifdef STM32F10X_CL
+            /* Enable PLL2 */
+            RCC_PLL2Cmd( ENABLE );
+#else
+            /* Enable PLL: once the PLL is ready the PLLRDY interrupt is generated */
+            RCC_PLLCmd( ENABLE );
+#endif /* STM32F10X_CL */
+#endif /* SYSCLK_HSE */
+        }
     }
-  }
 
 #ifdef STM32F10X_CL
-  if(RCC_GetITStatus(RCC_IT_PLL2RDY) != RESET)
-  { 
-    /* Clear PLL2RDY interrupt pending bit */
-    RCC_ClearITPendingBit(RCC_IT_PLL2RDY);
 
-    /* Enable PLL: once the PLL is ready the PLLRDY interrupt is generated */ 
-    RCC_PLLCmd(ENABLE);
-  }
-#endif /* STM32F10X_CL */   
+    if( RCC_GetITStatus( RCC_IT_PLL2RDY ) != RESET )
+    {
+        /* Clear PLL2RDY interrupt pending bit */
+        RCC_ClearITPendingBit( RCC_IT_PLL2RDY );
 
-  if(RCC_GetITStatus(RCC_IT_PLLRDY) != RESET)
-  { 
-    /* Clear PLLRDY interrupt pending bit */
-    RCC_ClearITPendingBit(RCC_IT_PLLRDY);
-
-    /* Check if the PLL is still locked */
-    if (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) != RESET)
-    { 
-      /* Select PLL as system clock source */
-      RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
+        /* Enable PLL: once the PLL is ready the PLLRDY interrupt is generated */
+        RCC_PLLCmd( ENABLE );
     }
-  }
+
+#endif /* STM32F10X_CL */
+
+    if( RCC_GetITStatus( RCC_IT_PLLRDY ) != RESET )
+    {
+        /* Clear PLLRDY interrupt pending bit */
+        RCC_ClearITPendingBit( RCC_IT_PLLRDY );
+
+        /* Check if the PLL is still locked */
+        if( RCC_GetFlagStatus( RCC_FLAG_PLLRDY ) != RESET )
+        {
+            /* Select PLL as system clock source */
+            RCC_SYSCLKConfig( RCC_SYSCLKSource_PLLCLK );
+        }
+    }
 }
 
 /******************************************************************************/
@@ -247,10 +250,10 @@ void RCC_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

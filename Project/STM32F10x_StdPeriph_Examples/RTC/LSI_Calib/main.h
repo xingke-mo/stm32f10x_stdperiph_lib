@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file RTC/LSI_Calib/main.h 
+  * @file RTC/LSI_Calib/main.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -26,15 +26,15 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
 #include "stm32_eval.h"
-  
+
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-uint32_t IncrementVar_OperationComplete(void);
-uint32_t GetVar_OperationComplete(void);
-void SetVar_PeriodValue(uint32_t Value);
+uint32_t IncrementVar_OperationComplete( void );
+uint32_t GetVar_OperationComplete( void );
+void SetVar_PeriodValue( uint32_t Value );
 
 #endif /* __MAIN_H*/
 

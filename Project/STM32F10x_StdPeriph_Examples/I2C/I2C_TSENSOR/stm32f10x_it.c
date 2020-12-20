@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_TSENSOR/stm32f10x_it.c 
+  * @file    I2C/I2C_TSENSOR/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -31,7 +31,7 @@
 
 /** @addtogroup I2C_TSENSOR
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,7 +51,7 @@ extern __IO uint8_t SMbusAlertOccurred;
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -60,12 +60,12 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -73,12 +73,12 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -86,12 +86,12 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -99,12 +99,12 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -112,7 +112,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -121,7 +121,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -130,7 +130,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -139,7 +139,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -152,48 +152,53 @@ void SysTick_Handler(void)
   * @retval None
   */
 #ifdef USE_STM32100E_EVAL
-void I2C2_ER_IRQHandler(void)
+    void I2C2_ER_IRQHandler( void )
 #else
-void I2C1_ER_IRQHandler(void)
+    void I2C1_ER_IRQHandler( void )
 #endif /* STM32100E-EVAL */
 {
-  /* Check on I2C2 SMBALERT flag and clear it */
-  if (I2C_GetITStatus(LM75_I2C, I2C_IT_SMBALERT))
-  {
-    I2C_ClearITPendingBit(LM75_I2C, I2C_IT_SMBALERT);
-    SMbusAlertOccurred++;
-  }
-  /* Check on I2C2 Time out flag and clear it */
-  if (I2C_GetITStatus(LM75_I2C, I2C_IT_TIMEOUT))
-  {
-    I2C_ClearITPendingBit(LM75_I2C, I2C_IT_TIMEOUT);
-  }
-  /* Check on I2C2 Arbitration Lost flag and clear it */
-  if (I2C_GetITStatus(LM75_I2C, I2C_IT_ARLO))
-  {
-    I2C_ClearITPendingBit(LM75_I2C, I2C_IT_ARLO);
-  } 
+    /* Check on I2C2 SMBALERT flag and clear it */
+    if( I2C_GetITStatus( LM75_I2C, I2C_IT_SMBALERT ) )
+    {
+        I2C_ClearITPendingBit( LM75_I2C, I2C_IT_SMBALERT );
+        SMbusAlertOccurred++;
+    }
 
-  /* Check on I2C2 PEC error flag and clear it */
-  if (I2C_GetITStatus(LM75_I2C, I2C_IT_PECERR))
-  {
-    I2C_ClearITPendingBit(LM75_I2C, I2C_IT_PECERR);
-  } 
-  /* Check on I2C2 Overrun/Underrun error flag and clear it */
-  if (I2C_GetITStatus(LM75_I2C, I2C_IT_OVR))
-  {
-    I2C_ClearITPendingBit(LM75_I2C, I2C_IT_OVR);
-  } 
-  /* Check on I2C2 Acknowledge failure error flag and clear it */
-  if (I2C_GetITStatus(LM75_I2C, I2C_IT_AF))
-  {
-    I2C_ClearITPendingBit(LM75_I2C, I2C_IT_AF);
-  }
-  /* Check on I2C2 Bus error flag and clear it */
-  if (I2C_GetITStatus(LM75_I2C, I2C_IT_BERR))
-  {
-    I2C_ClearITPendingBit(LM75_I2C, I2C_IT_BERR);
-  }   
+    /* Check on I2C2 Time out flag and clear it */
+    if( I2C_GetITStatus( LM75_I2C, I2C_IT_TIMEOUT ) )
+    {
+        I2C_ClearITPendingBit( LM75_I2C, I2C_IT_TIMEOUT );
+    }
+
+    /* Check on I2C2 Arbitration Lost flag and clear it */
+    if( I2C_GetITStatus( LM75_I2C, I2C_IT_ARLO ) )
+    {
+        I2C_ClearITPendingBit( LM75_I2C, I2C_IT_ARLO );
+    }
+
+    /* Check on I2C2 PEC error flag and clear it */
+    if( I2C_GetITStatus( LM75_I2C, I2C_IT_PECERR ) )
+    {
+        I2C_ClearITPendingBit( LM75_I2C, I2C_IT_PECERR );
+    }
+
+    /* Check on I2C2 Overrun/Underrun error flag and clear it */
+    if( I2C_GetITStatus( LM75_I2C, I2C_IT_OVR ) )
+    {
+        I2C_ClearITPendingBit( LM75_I2C, I2C_IT_OVR );
+    }
+
+    /* Check on I2C2 Acknowledge failure error flag and clear it */
+    if( I2C_GetITStatus( LM75_I2C, I2C_IT_AF ) )
+    {
+        I2C_ClearITPendingBit( LM75_I2C, I2C_IT_AF );
+    }
+
+    /* Check on I2C2 Bus error flag and clear it */
+    if( I2C_GetITStatus( LM75_I2C, I2C_IT_BERR ) )
+    {
+        I2C_ClearITPendingBit( LM75_I2C, I2C_IT_BERR );
+    }
 }
 
 /******************************************************************************/
@@ -214,10 +219,10 @@ void I2C1_ER_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

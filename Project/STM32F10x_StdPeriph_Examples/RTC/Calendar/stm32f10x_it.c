@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    RTC/Calendar/stm32f10x_it.c 
+  * @file    RTC/Calendar/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -31,7 +31,7 @@
 
 /** @addtogroup RTC_Calendar
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,7 +51,7 @@ extern __IO uint32_t TimeDisplay;
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -60,11 +60,11 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -72,11 +72,11 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -84,11 +84,11 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -96,11 +96,11 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -108,7 +108,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -117,7 +117,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -126,7 +126,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -135,7 +135,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -148,23 +148,23 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void RTC_IRQHandler(void)
+void RTC_IRQHandler( void )
 {
-  if (RTC_GetITStatus(RTC_IT_SEC) != RESET)
-  {
-    /* Clear the RTC Second interrupt */
-    RTC_ClearITPendingBit(RTC_IT_SEC);
+    if( RTC_GetITStatus( RTC_IT_SEC ) != RESET )
+    {
+        /* Clear the RTC Second interrupt */
+        RTC_ClearITPendingBit( RTC_IT_SEC );
 
-    /* Toggle LED1 */
-    STM_EVAL_LEDToggle(LED1);
+        /* Toggle LED1 */
+        STM_EVAL_LEDToggle( LED1 );
 
-    /* Enable time update */
-    TimeDisplay = 1;
+        /* Enable time update */
+        TimeDisplay = 1;
 
-    /* Wait until last write operation on RTC registers has finished */
-    RTC_WaitForLastTask();
-    
-  }
+        /* Wait until last write operation on RTC registers has finished */
+        RTC_WaitForLastTask();
+
+    }
 }
 
 /******************************************************************************/
@@ -185,10 +185,10 @@ void RTC_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

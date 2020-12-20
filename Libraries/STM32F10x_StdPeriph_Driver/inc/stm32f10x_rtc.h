@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    11-March-2011
-  * @brief   This file contains all the functions prototypes for the RTC firmware 
+  * @brief   This file contains all the functions prototypes for the RTC firmware
   *          library.
   ******************************************************************************
   * @attention
@@ -25,7 +25,7 @@
 #define __STM32F10x_RTC_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -37,21 +37,21 @@
 
 /** @addtogroup RTC
   * @{
-  */ 
+  */
 
 /** @defgroup RTC_Exported_Types
   * @{
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup RTC_Exported_Constants
   * @{
   */
 
-/** @defgroup RTC_interrupts_define 
+/** @defgroup RTC_interrupts_define
   * @{
   */
 
@@ -63,9 +63,9 @@
                            ((IT) == RTC_IT_SEC))
 /**
   * @}
-  */ 
+  */
 
-/** @defgroup RTC_interrupts_flags 
+/** @defgroup RTC_interrupts_flags
   * @{
   */
 
@@ -100,20 +100,20 @@
   * @{
   */
 
-void RTC_ITConfig(uint16_t RTC_IT, FunctionalState NewState);
-void RTC_EnterConfigMode(void);
-void RTC_ExitConfigMode(void);
-uint32_t  RTC_GetCounter(void);
-void RTC_SetCounter(uint32_t CounterValue);
-void RTC_SetPrescaler(uint32_t PrescalerValue);
-void RTC_SetAlarm(uint32_t AlarmValue);
-uint32_t  RTC_GetDivider(void);
-void RTC_WaitForLastTask(void);
-void RTC_WaitForSynchro(void);
-FlagStatus RTC_GetFlagStatus(uint16_t RTC_FLAG);
-void RTC_ClearFlag(uint16_t RTC_FLAG);
-ITStatus RTC_GetITStatus(uint16_t RTC_IT);
-void RTC_ClearITPendingBit(uint16_t RTC_IT);
+void RTC_ITConfig( uint16_t RTC_IT, FunctionalState NewState );
+void RTC_EnterConfigMode( void );
+void RTC_ExitConfigMode( void );
+uint32_t  RTC_GetCounter( void );
+void RTC_SetCounter( uint32_t CounterValue );
+void RTC_SetPrescaler( uint32_t PrescalerValue );
+void RTC_SetAlarm( uint32_t AlarmValue );
+uint32_t  RTC_GetDivider( void );
+void RTC_WaitForLastTask( void );
+void RTC_WaitForSynchro( void );
+FlagStatus RTC_GetFlagStatus( uint16_t RTC_FLAG );
+void RTC_ClearFlag( uint16_t RTC_FLAG );
+ITStatus RTC_GetITStatus( uint16_t RTC_IT );
+void RTC_ClearITPendingBit( uint16_t RTC_IT );
 
 #ifdef __cplusplus
 }

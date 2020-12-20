@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/DMA_Interrupt/main.c 
+  * @file    USART/DMA_Interrupt/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -29,7 +29,7 @@
 
 /** @addtogroup USART_DMA_Interrupt
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
@@ -52,11 +52,11 @@ uint32_t index = 0;
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
 
 /* Private function prototypes -----------------------------------------------*/
-void RCC_Configuration(void);
-void GPIO_Configuration(void);
-void NVIC_Configuration(void);
-void DMA_Configuration(void);
-TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
+void RCC_Configuration( void );
+void GPIO_Configuration( void );
+void NVIC_Configuration( void );
+void DMA_Configuration( void );
+TestStatus Buffercmp( uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferLength );
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -65,104 +65,106 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   * @param  None
   * @retval None
   */
-int main(void)
+int main( void )
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
-       this is done through SystemInit() function which is called from startup
-       file (startup_stm32f10x_xx.s) before to branch to application main.
-       To reconfigure the default setting of SystemInit() function, refer to
-       system_stm32f10x.c file
-     */     
-       
-  /* System Clocks Configuration */
-  RCC_Configuration();
-       
-  /* NVIC configuration */
-  NVIC_Configuration();
+    /*!< At this stage the microcontroller clock setting is already configured,
+         this is done through SystemInit() function which is called from startup
+         file (startup_stm32f10x_xx.s) before to branch to application main.
+         To reconfigure the default setting of SystemInit() function, refer to
+         system_stm32f10x.c file
+       */
 
-  /* Configure the GPIO ports */
-  GPIO_Configuration();
+    /* System Clocks Configuration */
+    RCC_Configuration();
 
-  /* Configure the DMA */
-  DMA_Configuration();
+    /* NVIC configuration */
+    NVIC_Configuration();
 
-/* USARTy and USARTz configuration -------------------------------------------*/
-  /* USARTy and USARTz configured as follow:
-        - BaudRate = 230400 baud  
-        - Word Length = 8 Bits
-        - One Stop Bit
-        - No parity
-        - Hardware flow control disabled (RTS and CTS signals)
-        - Receive and transmit enabled
-  */
+    /* Configure the GPIO ports */
+    GPIO_Configuration();
 
-  USART_InitStructure.USART_BaudRate = 230400;
-  USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-  USART_InitStructure.USART_StopBits = USART_StopBits_1;
-  USART_InitStructure.USART_Parity = USART_Parity_No;
-  USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-  USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-  
-  /* Configure USARTy */
-  USART_Init(USARTy, &USART_InitStructure);
+    /* Configure the DMA */
+    DMA_Configuration();
 
-  /* Configure USARTz */
-  USART_Init(USARTz, &USART_InitStructure);
+    /* USARTy and USARTz configuration -------------------------------------------*/
+    /* USARTy and USARTz configured as follow:
+          - BaudRate = 230400 baud
+          - Word Length = 8 Bits
+          - One Stop Bit
+          - No parity
+          - Hardware flow control disabled (RTS and CTS signals)
+          - Receive and transmit enabled
+    */
 
-  /* Enable USARTy DMA TX request */
-  USART_DMACmd(USARTy, USART_DMAReq_Tx, ENABLE);
+    USART_InitStructure.USART_BaudRate = 230400;
+    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    USART_InitStructure.USART_StopBits = USART_StopBits_1;
+    USART_InitStructure.USART_Parity = USART_Parity_No;
+    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 
-  /* Enable USARTz DMA TX request */
-  USART_DMACmd(USARTz, USART_DMAReq_Tx, ENABLE);
+    /* Configure USARTy */
+    USART_Init( USARTy, &USART_InitStructure );
 
-  /* Enable the USARTz Receive Interrupt */
-  USART_ITConfig(USARTz, USART_IT_RXNE, ENABLE);
-  
-  /* Enable USARTy */
-  USART_Cmd(USARTy, ENABLE);
+    /* Configure USARTz */
+    USART_Init( USARTz, &USART_InitStructure );
 
-  /* Enable USARTz */
-  USART_Cmd(USARTz, ENABLE);
+    /* Enable USARTy DMA TX request */
+    USART_DMACmd( USARTy, USART_DMAReq_Tx, ENABLE );
 
-  /* Enable USARTy DMA TX Channel */
-  DMA_Cmd(USARTy_Tx_DMA_Channel, ENABLE);
+    /* Enable USARTz DMA TX request */
+    USART_DMACmd( USARTz, USART_DMAReq_Tx, ENABLE );
 
-  /* Enable USARTz DMA TX Channel */
-  DMA_Cmd(USARTz_Tx_DMA_Channel, ENABLE);
+    /* Enable the USARTz Receive Interrupt */
+    USART_ITConfig( USARTz, USART_IT_RXNE, ENABLE );
 
-  /* Receive the TxBuffer2 */
-  while(index < TxBufferSize2)
-  {
-     while(USART_GetFlagStatus(USARTy, USART_FLAG_RXNE) == RESET)
-     {
-     }
-     RxBuffer1[index++] = USART_ReceiveData(USARTy);  
-  }
+    /* Enable USARTy */
+    USART_Cmd( USARTy, ENABLE );
 
-  /* Wait until USARTy TX DMA1 Channel  Transfer Complete */
-  while (DMA_GetFlagStatus(USARTy_Tx_DMA_FLAG) == RESET)
-  {
-  }
-  /* Wait until USARTz TX DMA1 Channel Transfer Complete */
-  while (DMA_GetFlagStatus(USARTz_Tx_DMA_FLAG) == RESET)
-  {
-  }
-  
-  /* Check the received data with the send ones */
-  TransferStatus1 = Buffercmp(TxBuffer2, RxBuffer1, TxBufferSize2);
-  /* TransferStatus1 = PASSED, if the data transmitted from USARTz and  
-     received by USARTy are the same */
-  /* TransferStatus1 = FAILED, if the data transmitted from USARTz and 
-     received by USARTy are different */
-  TransferStatus2 = Buffercmp(TxBuffer1, RxBuffer2, TxBufferSize1);
-  /* TransferStatus2 = PASSED, if the data transmitted from USARTy and  
-     received by USARTz are the same */
-  /* TransferStatus2 = FAILED, if the data transmitted from USARTy and 
-     received by USARTz are different */
+    /* Enable USARTz */
+    USART_Cmd( USARTz, ENABLE );
 
-  while (1)
-  {
-  }
+    /* Enable USARTy DMA TX Channel */
+    DMA_Cmd( USARTy_Tx_DMA_Channel, ENABLE );
+
+    /* Enable USARTz DMA TX Channel */
+    DMA_Cmd( USARTz_Tx_DMA_Channel, ENABLE );
+
+    /* Receive the TxBuffer2 */
+    while( index < TxBufferSize2 )
+    {
+        while( USART_GetFlagStatus( USARTy, USART_FLAG_RXNE ) == RESET )
+        {
+        }
+
+        RxBuffer1[index++] = USART_ReceiveData( USARTy );
+    }
+
+    /* Wait until USARTy TX DMA1 Channel  Transfer Complete */
+    while( DMA_GetFlagStatus( USARTy_Tx_DMA_FLAG ) == RESET )
+    {
+    }
+
+    /* Wait until USARTz TX DMA1 Channel Transfer Complete */
+    while( DMA_GetFlagStatus( USARTz_Tx_DMA_FLAG ) == RESET )
+    {
+    }
+
+    /* Check the received data with the send ones */
+    TransferStatus1 = Buffercmp( TxBuffer2, RxBuffer1, TxBufferSize2 );
+    /* TransferStatus1 = PASSED, if the data transmitted from USARTz and
+       received by USARTy are the same */
+    /* TransferStatus1 = FAILED, if the data transmitted from USARTz and
+       received by USARTy are different */
+    TransferStatus2 = Buffercmp( TxBuffer1, RxBuffer2, TxBufferSize1 );
+    /* TransferStatus2 = PASSED, if the data transmitted from USARTy and
+       received by USARTz are the same */
+    /* TransferStatus2 = FAILED, if the data transmitted from USARTy and
+       received by USARTz are different */
+
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -170,23 +172,23 @@ int main(void)
   * @param  None
   * @retval None
   */
-void RCC_Configuration(void)
-{    
-  /* DMA clock enable */
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+void RCC_Configuration( void )
+{
+    /* DMA clock enable */
+    RCC_AHBPeriphClockCmd( RCC_AHBPeriph_DMA1, ENABLE );
 
-  /* Enable GPIO clock */
-  RCC_APB2PeriphClockCmd(USARTy_GPIO_CLK | USARTz_GPIO_CLK | RCC_APB2Periph_AFIO, ENABLE);
+    /* Enable GPIO clock */
+    RCC_APB2PeriphClockCmd( USARTy_GPIO_CLK | USARTz_GPIO_CLK | RCC_APB2Periph_AFIO, ENABLE );
 
 #ifndef USE_STM3210C_EVAL
-  /* Enable USARTy Clock */
-  RCC_APB2PeriphClockCmd(USARTy_CLK, ENABLE); 
+    /* Enable USARTy Clock */
+    RCC_APB2PeriphClockCmd( USARTy_CLK, ENABLE );
 #else
-  /* Enable USARTy Clock */
-  RCC_APB1PeriphClockCmd(USARTy_CLK, ENABLE); 
+    /* Enable USARTy Clock */
+    RCC_APB1PeriphClockCmd( USARTy_CLK, ENABLE );
 #endif
-  /* Enable USARTz Clock */
-  RCC_APB1PeriphClockCmd(USARTz_CLK, ENABLE);  
+    /* Enable USARTz Clock */
+    RCC_APB1PeriphClockCmd( USARTz_CLK, ENABLE );
 }
 
 /**
@@ -194,39 +196,39 @@ void RCC_Configuration(void)
   * @param  None
   * @retval None
   */
-void GPIO_Configuration(void)
+void GPIO_Configuration( void )
 {
-  GPIO_InitTypeDef GPIO_InitStructure;
+    GPIO_InitTypeDef GPIO_InitStructure;
 
 #ifdef USE_STM3210C_EVAL
-  /* Enable the USART3 Pins Software Remapping */
-  GPIO_PinRemapConfig(GPIO_PartialRemap_USART3, ENABLE);
-  
-  /* Enable the USART2 Pins Software Remapping */
-  GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);  
+    /* Enable the USART3 Pins Software Remapping */
+    GPIO_PinRemapConfig( GPIO_PartialRemap_USART3, ENABLE );
+
+    /* Enable the USART2 Pins Software Remapping */
+    GPIO_PinRemapConfig( GPIO_Remap_USART2, ENABLE );
 #elif defined(USE_STM3210B_EVAL) || defined(USE_STM32100B_EVAL)
-  /* Enable the USART2 Pins Software Remapping */
-  GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
+    /* Enable the USART2 Pins Software Remapping */
+    GPIO_PinRemapConfig( GPIO_Remap_USART2, ENABLE );
 #endif
 
-  /* Configure USARTy Rx as input floating */
-  GPIO_InitStructure.GPIO_Pin = USARTy_RxPin;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-  GPIO_Init(USARTy_GPIO, &GPIO_InitStructure);
-  
-  /* Configure USARTz Rx as input floating */
-  GPIO_InitStructure.GPIO_Pin = USARTz_RxPin;
-  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);  
-  
-  /* Configure USARTy Tx as alternate function push-pull */
-  GPIO_InitStructure.GPIO_Pin = USARTy_TxPin;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-  GPIO_Init(USARTy_GPIO, &GPIO_InitStructure);
+    /* Configure USARTy Rx as input floating */
+    GPIO_InitStructure.GPIO_Pin = USARTy_RxPin;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_Init( USARTy_GPIO, &GPIO_InitStructure );
 
-  /* Configure USARTz Tx as alternate function push-pull */
-  GPIO_InitStructure.GPIO_Pin = USARTz_TxPin;
-  GPIO_Init(USARTz_GPIO, &GPIO_InitStructure);  
+    /* Configure USARTz Rx as input floating */
+    GPIO_InitStructure.GPIO_Pin = USARTz_RxPin;
+    GPIO_Init( USARTz_GPIO, &GPIO_InitStructure );
+
+    /* Configure USARTy Tx as alternate function push-pull */
+    GPIO_InitStructure.GPIO_Pin = USARTy_TxPin;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_Init( USARTy_GPIO, &GPIO_InitStructure );
+
+    /* Configure USARTz Tx as alternate function push-pull */
+    GPIO_InitStructure.GPIO_Pin = USARTz_TxPin;
+    GPIO_Init( USARTz_GPIO, &GPIO_InitStructure );
 }
 
 /**
@@ -234,16 +236,16 @@ void GPIO_Configuration(void)
   * @param  None
   * @retval None
   */
-void NVIC_Configuration(void)
+void NVIC_Configuration( void )
 {
-   NVIC_InitTypeDef NVIC_InitStructure;
+    NVIC_InitTypeDef NVIC_InitStructure;
 
-  /* Enable the USARTz Interrupt */
-  NVIC_InitStructure.NVIC_IRQChannel = USARTz_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
+    /* Enable the USARTz Interrupt */
+    NVIC_InitStructure.NVIC_IRQChannel = USARTz_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init( &NVIC_InitStructure );
 }
 
 /**
@@ -251,32 +253,32 @@ void NVIC_Configuration(void)
   * @param  None
   * @retval None
   */
-void DMA_Configuration(void)
+void DMA_Configuration( void )
 {
-  DMA_InitTypeDef DMA_InitStructure;
+    DMA_InitTypeDef DMA_InitStructure;
 
-  /* USARTy_Tx_DMA_Channel (triggered by USARTy Tx event) Config */
-  DMA_DeInit(USARTy_Tx_DMA_Channel);
-  DMA_InitStructure.DMA_PeripheralBaseAddr = USARTy_DR_Base;
-  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)TxBuffer1;
-  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
-  DMA_InitStructure.DMA_BufferSize = TxBufferSize1;
-  DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-  DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
-  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
-  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
-  DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
-  DMA_InitStructure.DMA_Priority = DMA_Priority_VeryHigh;
-  DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
-  DMA_Init(USARTy_Tx_DMA_Channel, &DMA_InitStructure);
-  
-  /* USARTz_Tx_DMA_Channel (triggered by USARTz Tx event) Config */
-  DMA_DeInit(USARTz_Tx_DMA_Channel);
-  DMA_InitStructure.DMA_PeripheralBaseAddr = USARTz_DR_Base;
-  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)TxBuffer2;
-  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
-  DMA_InitStructure.DMA_BufferSize = TxBufferSize2;
-  DMA_Init(USARTz_Tx_DMA_Channel, &DMA_InitStructure);
+    /* USARTy_Tx_DMA_Channel (triggered by USARTy Tx event) Config */
+    DMA_DeInit( USARTy_Tx_DMA_Channel );
+    DMA_InitStructure.DMA_PeripheralBaseAddr = USARTy_DR_Base;
+    DMA_InitStructure.DMA_MemoryBaseAddr = ( uint32_t )TxBuffer1;
+    DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
+    DMA_InitStructure.DMA_BufferSize = TxBufferSize1;
+    DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+    DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+    DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+    DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+    DMA_InitStructure.DMA_Priority = DMA_Priority_VeryHigh;
+    DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+    DMA_Init( USARTy_Tx_DMA_Channel, &DMA_InitStructure );
+
+    /* USARTz_Tx_DMA_Channel (triggered by USARTz Tx event) Config */
+    DMA_DeInit( USARTz_Tx_DMA_Channel );
+    DMA_InitStructure.DMA_PeripheralBaseAddr = USARTz_DR_Base;
+    DMA_InitStructure.DMA_MemoryBaseAddr = ( uint32_t )TxBuffer2;
+    DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
+    DMA_InitStructure.DMA_BufferSize = TxBufferSize2;
+    DMA_Init( USARTz_Tx_DMA_Channel, &DMA_InitStructure );
 }
 
 /**
@@ -286,20 +288,20 @@ void DMA_Configuration(void)
   * @retval PASSED: pBuffer1 identical to pBuffer2
   *         FAILED: pBuffer1 differs from pBuffer2
   */
-TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
+TestStatus Buffercmp( uint8_t *pBuffer1, uint8_t *pBuffer2, uint16_t BufferLength )
 {
-  while(BufferLength--)
-  {
-    if(*pBuffer1 != *pBuffer2)
+    while( BufferLength-- )
     {
-      return FAILED;
+        if( *pBuffer1 != *pBuffer2 )
+        {
+            return FAILED;
+        }
+
+        pBuffer1++;
+        pBuffer2++;
     }
 
-    pBuffer1++;
-    pBuffer2++;
-  }
-
-  return PASSED;
+    return PASSED;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -311,25 +313,25 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
-{ 
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+void assert_failed( uint8_t *file, uint32_t line )
+{
+    /* User can add his own implementation to report the file name and line number,
+       ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
-  /* Infinite loop */
-  while (1)
-  {
-  }
+    /* Infinite loop */
+    while( 1 )
+    {
+    }
 }
 
 #endif
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

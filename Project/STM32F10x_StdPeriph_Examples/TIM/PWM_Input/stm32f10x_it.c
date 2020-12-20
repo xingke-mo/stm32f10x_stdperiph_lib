@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    TIM/PWM_Input/stm32f10x_it.c 
+  * @file    TIM/PWM_Input/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup TIM_PWM_Input
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -52,7 +52,7 @@ __IO uint32_t Frequency = 0;
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -61,11 +61,11 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -73,11 +73,11 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -85,11 +85,11 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -97,11 +97,11 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -109,7 +109,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {}
 
 /**
@@ -117,7 +117,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {}
 
 /**
@@ -125,7 +125,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {}
 
 /**
@@ -133,7 +133,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {}
 
 /******************************************************************************/
@@ -145,27 +145,27 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void TIM3_IRQHandler(void)
+void TIM3_IRQHandler( void )
 {
-  /* Clear TIM3 Capture compare interrupt pending bit */
-  TIM_ClearITPendingBit(TIM3, TIM_IT_CC2);
+    /* Clear TIM3 Capture compare interrupt pending bit */
+    TIM_ClearITPendingBit( TIM3, TIM_IT_CC2 );
 
-  /* Get the Input Capture value */
-  IC2Value = TIM_GetCapture2(TIM3);
+    /* Get the Input Capture value */
+    IC2Value = TIM_GetCapture2( TIM3 );
 
-  if (IC2Value != 0)
-  {
-    /* Duty cycle computation */
-    DutyCycle = (TIM_GetCapture1(TIM3) * 100) / IC2Value;
+    if( IC2Value != 0 )
+    {
+        /* Duty cycle computation */
+        DutyCycle = ( TIM_GetCapture1( TIM3 ) * 100 ) / IC2Value;
 
-    /* Frequency computation */
-    Frequency = SystemCoreClock / IC2Value;
-  }
-  else
-  {
-    DutyCycle = 0;
-    Frequency = 0;
-  }
+        /* Frequency computation */
+        Frequency = SystemCoreClock / IC2Value;
+    }
+    else
+    {
+        DutyCycle = 0;
+        Frequency = 0;
+    }
 }
 
 /******************************************************************************/
@@ -186,10 +186,10 @@ void TIM3_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

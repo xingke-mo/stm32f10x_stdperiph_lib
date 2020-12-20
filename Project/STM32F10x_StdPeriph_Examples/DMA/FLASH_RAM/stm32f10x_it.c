@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    DMA/FLASH_RAM/stm32f10x_it.c 
+  * @file    DMA/FLASH_RAM/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup DMA_FLASH_RAM
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -50,7 +50,7 @@ extern __IO uint16_t CurrDataCounterEnd;
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -59,12 +59,12 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -72,12 +72,12 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -85,12 +85,12 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -98,12 +98,12 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -111,7 +111,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -120,7 +120,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -129,7 +129,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -138,7 +138,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -151,16 +151,16 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void DMA1_Channel6_IRQHandler(void)
+void DMA1_Channel6_IRQHandler( void )
 {
-  /* Test on DMA1 Channel6 Transfer Complete interrupt */
-  if(DMA_GetITStatus(DMA1_IT_TC6))
-  {
-    /* Get Current Data Counter value after complete transfer */
-    CurrDataCounterEnd = DMA_GetCurrDataCounter(DMA1_Channel6);
-    /* Clear DMA1 Channel6 Half Transfer, Transfer Complete and Global interrupt pending bits */
-    DMA_ClearITPendingBit(DMA1_IT_GL6);
-  }
+    /* Test on DMA1 Channel6 Transfer Complete interrupt */
+    if( DMA_GetITStatus( DMA1_IT_TC6 ) )
+    {
+        /* Get Current Data Counter value after complete transfer */
+        CurrDataCounterEnd = DMA_GetCurrDataCounter( DMA1_Channel6 );
+        /* Clear DMA1 Channel6 Half Transfer, Transfer Complete and Global interrupt pending bits */
+        DMA_ClearITPendingBit( DMA1_IT_GL6 );
+    }
 }
 
 /******************************************************************************/
@@ -181,10 +181,10 @@ void DMA1_Channel6_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

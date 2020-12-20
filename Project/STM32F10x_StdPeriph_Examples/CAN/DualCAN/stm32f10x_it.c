@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    CAN/DualCAN/stm32f10x_it.c 
+  * @file    CAN/DualCAN/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,15 +30,15 @@
 
 /** @addtogroup CAN_DualCAN
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 CanRxMsg RxMessage;
-extern void LED_Display(uint8_t Ledstatus);
- 
+extern void LED_Display( uint8_t Ledstatus );
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -51,7 +51,7 @@ extern void LED_Display(uint8_t Ledstatus);
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -60,12 +60,12 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -73,12 +73,12 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -86,12 +86,12 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -99,12 +99,12 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -112,7 +112,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -121,7 +121,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -130,7 +130,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -139,7 +139,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -153,20 +153,20 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void CAN1_RX0_IRQHandler(void)
+void CAN1_RX0_IRQHandler( void )
 {
-  CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);
+    CAN_Receive( CAN1, CAN_FIFO0, &RxMessage );
 
-  if ((RxMessage.StdId == 0x321)&&(RxMessage.IDE == CAN_ID_STD)&&(RxMessage.DLC == 1)&&(RxMessage.Data[0] == 0xAA))
-  {
-    /* Turn On LED3 */
-    LED_Display(0x03); /* OK */
-  }
-  else
-  {
-    /* Turn Off LED3 */
-    LED_Display(0x05); /* Error */
-  }
+    if( ( RxMessage.StdId == 0x321 ) && ( RxMessage.IDE == CAN_ID_STD ) && ( RxMessage.DLC == 1 ) && ( RxMessage.Data[0] == 0xAA ) )
+    {
+        /* Turn On LED3 */
+        LED_Display( 0x03 ); /* OK */
+    }
+    else
+    {
+        /* Turn Off LED3 */
+        LED_Display( 0x05 ); /* Error */
+    }
 }
 
 /**
@@ -175,20 +175,20 @@ void CAN1_RX0_IRQHandler(void)
   * @retval None
   */
 
-void CAN2_RX0_IRQHandler(void)
+void CAN2_RX0_IRQHandler( void )
 {
-  CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
+    CAN_Receive( CAN2, CAN_FIFO0, &RxMessage );
 
-  if ((RxMessage.StdId == 0x321)&&(RxMessage.IDE == CAN_ID_STD)&&(RxMessage.DLC == 1)&&(RxMessage.Data[0] == 0x55))
-  {
-    /* Turn On LED4 */
-    LED_Display(0x04); /* OK */
-  }
-  else
-  {
-    /* Turn Off LED4 */
-    LED_Display(0x06); /* Error */
-  }
+    if( ( RxMessage.StdId == 0x321 ) && ( RxMessage.IDE == CAN_ID_STD ) && ( RxMessage.DLC == 1 ) && ( RxMessage.Data[0] == 0x55 ) )
+    {
+        /* Turn On LED4 */
+        LED_Display( 0x04 ); /* OK */
+    }
+    else
+    {
+        /* Turn Off LED4 */
+        LED_Display( 0x06 ); /* Error */
+    }
 }
 
 /******************************************************************************/
@@ -209,11 +209,11 @@ void CAN2_RX0_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

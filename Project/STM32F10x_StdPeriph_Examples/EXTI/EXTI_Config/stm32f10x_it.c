@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    EXTI/EXTI_Config/stm32f10x_it.c 
+  * @file    EXTI/EXTI_Config/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -31,7 +31,7 @@
 
 /** @addtogroup EXTI_Config
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -49,7 +49,7 @@
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -58,12 +58,12 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -71,12 +71,12 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -84,12 +84,12 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -97,12 +97,12 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -110,7 +110,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -119,7 +119,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -128,7 +128,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -137,7 +137,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -150,16 +150,16 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void EXTI0_IRQHandler(void)
+void EXTI0_IRQHandler( void )
 {
-  if(EXTI_GetITStatus(EXTI_Line0) != RESET)
-  {
-    /* Toggle LED1 */
-     STM_EVAL_LEDToggle(LED1);
+    if( EXTI_GetITStatus( EXTI_Line0 ) != RESET )
+    {
+        /* Toggle LED1 */
+        STM_EVAL_LEDToggle( LED1 );
 
-    /* Clear the  EXTI line 0 pending bit */
-    EXTI_ClearITPendingBit(EXTI_Line0);
-  }
+        /* Clear the  EXTI line 0 pending bit */
+        EXTI_ClearITPendingBit( EXTI_Line0 );
+    }
 }
 
 /**
@@ -167,26 +167,30 @@ void EXTI0_IRQHandler(void)
   * @param  None
   * @retval None
   */
-void EXTI9_5_IRQHandler(void)
+void EXTI9_5_IRQHandler( void )
 {
 #if defined (STM32F10X_HD_VL) || defined (STM32F10X_HD) || defined (STM32F10X_XL)
-  if(EXTI_GetITStatus(EXTI_Line8) != RESET)
-  {
-    /* Toggle LED2 */
-     STM_EVAL_LEDToggle(LED2);
 
-    /* Clear the  EXTI line 8 pending bit */
-    EXTI_ClearITPendingBit(EXTI_Line8);
-  }
+    if( EXTI_GetITStatus( EXTI_Line8 ) != RESET )
+    {
+        /* Toggle LED2 */
+        STM_EVAL_LEDToggle( LED2 );
+
+        /* Clear the  EXTI line 8 pending bit */
+        EXTI_ClearITPendingBit( EXTI_Line8 );
+    }
+
 #else
-  if(EXTI_GetITStatus(EXTI_Line9) != RESET)
-  {
-    /* Toggle LED2 */
-     STM_EVAL_LEDToggle(LED2);
 
-    /* Clear the  EXTI line 9 pending bit */
-    EXTI_ClearITPendingBit(EXTI_Line9);
-  }
+    if( EXTI_GetITStatus( EXTI_Line9 ) != RESET )
+    {
+        /* Toggle LED2 */
+        STM_EVAL_LEDToggle( LED2 );
+
+        /* Clear the  EXTI line 9 pending bit */
+        EXTI_ClearITPendingBit( EXTI_Line9 );
+    }
+
 #endif
 }
 
@@ -208,10 +212,10 @@ void EXTI9_5_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

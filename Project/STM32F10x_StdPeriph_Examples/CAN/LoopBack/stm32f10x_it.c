@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    CAN/LoopBack/stm32f10x_it.c 
+  * @file    CAN/LoopBack/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup CAN_LoopBack
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -50,7 +50,7 @@ extern __IO uint32_t ret;
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -59,12 +59,12 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -72,12 +72,12 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -85,12 +85,12 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -98,12 +98,12 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -111,7 +111,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -120,7 +120,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -129,7 +129,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -138,7 +138,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -152,32 +152,32 @@ void SysTick_Handler(void)
   * @retval None
   */
 #ifndef STM32F10X_CL
-void USB_LP_CAN1_RX0_IRQHandler(void)
+    void USB_LP_CAN1_RX0_IRQHandler( void )
 #else
-void CAN1_RX0_IRQHandler(void)
+    void CAN1_RX0_IRQHandler( void )
 #endif
 {
-  CanRxMsg RxMessage;
+    CanRxMsg RxMessage;
 
-  RxMessage.StdId=0x00;
-  RxMessage.ExtId=0x00;
-  RxMessage.IDE=0;
-  RxMessage.DLC=0;
-  RxMessage.FMI=0;
-  RxMessage.Data[0]=0x00;
-  RxMessage.Data[1]=0x00;
+    RxMessage.StdId = 0x00;
+    RxMessage.ExtId = 0x00;
+    RxMessage.IDE = 0;
+    RxMessage.DLC = 0;
+    RxMessage.FMI = 0;
+    RxMessage.Data[0] = 0x00;
+    RxMessage.Data[1] = 0x00;
 
-  CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);
+    CAN_Receive( CAN1, CAN_FIFO0, &RxMessage );
 
-  if((RxMessage.ExtId==0x1234) && (RxMessage.IDE==CAN_ID_EXT)
-     && (RxMessage.DLC==2) && ((RxMessage.Data[1]|RxMessage.Data[0]<<8)==0xDECA))
-  {
-    ret = 1; 
-  }
-  else
-  {
-    ret = 0; 
-  }
+    if( ( RxMessage.ExtId == 0x1234 ) && ( RxMessage.IDE == CAN_ID_EXT )
+            && ( RxMessage.DLC == 2 ) && ( ( RxMessage.Data[1] | RxMessage.Data[0] << 8 ) == 0xDECA ) )
+    {
+        ret = 1;
+    }
+    else
+    {
+        ret = 0;
+    }
 }
 
 /**
@@ -186,30 +186,30 @@ void CAN1_RX0_IRQHandler(void)
   * @retval None
   */
 #ifdef STM32F10X_CL
-void CAN2_RX0_IRQHandler(void)
+void CAN2_RX0_IRQHandler( void )
 
 {
-  CanRxMsg RxMessage;
+    CanRxMsg RxMessage;
 
-  RxMessage.StdId=0x00;
-  RxMessage.ExtId=0x00;
-  RxMessage.IDE=0;
-  RxMessage.DLC=0;
-  RxMessage.FMI=0;
-  RxMessage.Data[0]=0x00;
-  RxMessage.Data[1]=0x00;
+    RxMessage.StdId = 0x00;
+    RxMessage.ExtId = 0x00;
+    RxMessage.IDE = 0;
+    RxMessage.DLC = 0;
+    RxMessage.FMI = 0;
+    RxMessage.Data[0] = 0x00;
+    RxMessage.Data[1] = 0x00;
 
-  CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
+    CAN_Receive( CAN2, CAN_FIFO0, &RxMessage );
 
-  if((RxMessage.ExtId==0x1234) && (RxMessage.IDE==CAN_ID_EXT)
-     && (RxMessage.DLC==2) && ((RxMessage.Data[1]|RxMessage.Data[0]<<8)==0xDECA))
-  {
-    ret = 1; 
-  }
-  else
-  {
-    ret = 0; 
-  }
+    if( ( RxMessage.ExtId == 0x1234 ) && ( RxMessage.IDE == CAN_ID_EXT )
+            && ( RxMessage.DLC == 2 ) && ( ( RxMessage.Data[1] | RxMessage.Data[0] << 8 ) == 0xDECA ) )
+    {
+        ret = 1;
+    }
+    else
+    {
+        ret = 0;
+    }
 }
 #endif
 /******************************************************************************/
@@ -230,10 +230,10 @@ void CAN2_RX0_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
-  
+  */
+
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

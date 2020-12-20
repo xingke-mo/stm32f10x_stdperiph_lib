@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CRC/CRC_Calculation/main.c 
+  * @file    CRC/CRC_Calculation/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup CRC_Calculation
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -37,7 +37,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static const uint32_t DataBuffer[BUFFER_SIZE] =
-  {
+{
     0x00001021, 0x20423063, 0x408450a5, 0x60c670e7, 0x9129a14a, 0xb16bc18c,
     0xd1ade1ce, 0xf1ef1231, 0x32732252, 0x52b54294, 0x72f762d6, 0x93398318,
     0xa35ad3bd, 0xc39cf3ff, 0xe3de2462, 0x34430420, 0x64e674c7, 0x44a45485,
@@ -57,12 +57,12 @@ static const uint32_t DataBuffer[BUFFER_SIZE] =
     0x4a755a54, 0x6a377a16, 0x0af11ad0, 0x2ab33a92, 0xed0fdd6c, 0xcd4dbdaa,
     0xad8b9de8, 0x8dc97c26, 0x5c644c45, 0x3ca22c83, 0x1ce00cc1, 0xef1fff3e,
     0xdf7caf9b, 0xbfba8fd9, 0x9ff86e17, 0x7e364e55, 0x2e933eb2, 0x0ed11ef0
-  };
+};
 
 __IO uint32_t CRCValue = 0;
 
 /* Private function prototypes -----------------------------------------------*/
-void Delay(__IO uint32_t nCount);
+void Delay( __IO uint32_t nCount );
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -71,24 +71,24 @@ void Delay(__IO uint32_t nCount);
   * @param  None
   * @retval None
   */
-int main(void)
+int main( void )
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
-       this is done through SystemInit() function which is called from startup
-       file (startup_stm32f10x_xx.s) before to branch to application main.
-       To reconfigure the default setting of SystemInit() function, refer to
-       system_stm32f10x.c file
-     */     
-       
-  /* Enable CRC clock */
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
+    /*!< At this stage the microcontroller clock setting is already configured,
+         this is done through SystemInit() function which is called from startup
+         file (startup_stm32f10x_xx.s) before to branch to application main.
+         To reconfigure the default setting of SystemInit() function, refer to
+         system_stm32f10x.c file
+       */
 
-  /* Compute the CRC of "DataBuffer" */
-  CRCValue = CRC_CalcBlockCRC((uint32_t *)DataBuffer, BUFFER_SIZE);
+    /* Enable CRC clock */
+    RCC_AHBPeriphClockCmd( RCC_AHBPeriph_CRC, ENABLE );
 
-  while (1)
-  {
-  }
+    /* Compute the CRC of "DataBuffer" */
+    CRCValue = CRC_CalcBlockCRC( ( uint32_t * )DataBuffer, BUFFER_SIZE );
+
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -96,9 +96,9 @@ int main(void)
   * @param  nCount: specifies the delay time length.
   * @retval None
   */
-void Delay(__IO uint32_t nCount)
+void Delay( __IO uint32_t nCount )
 {
-  for(; nCount != 0; nCount--);
+    for( ; nCount != 0; nCount-- );
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -110,25 +110,25 @@ void Delay(__IO uint32_t nCount)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
-{ 
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+void assert_failed( uint8_t *file, uint32_t line )
+{
+    /* User can add his own implementation to report the file name and line number,
+       ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
-  /* Infinite loop */
-  while (1)
-  {
-  }
+    /* Infinite loop */
+    while( 1 )
+    {
+    }
 }
 
 #endif
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

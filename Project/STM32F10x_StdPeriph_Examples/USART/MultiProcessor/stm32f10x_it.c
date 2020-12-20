@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/MultiProcessor/stm32f10x_it.c 
+  * @file    USART/MultiProcessor/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -28,10 +28,10 @@
 /** @addtogroup STM32F10x_StdPeriph_Examples
   * @{
   */
-  
+
 /** @addtogroup USART_MultiProcessor
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -49,7 +49,7 @@
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -58,12 +58,12 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -71,12 +71,12 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -84,12 +84,12 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -97,12 +97,12 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -110,7 +110,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -119,7 +119,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -128,7 +128,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -137,7 +137,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -150,18 +150,18 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void EXTI0_IRQHandler(void)
+void EXTI0_IRQHandler( void )
 {
-  /* Send the address mark (0x102) to wakeup USARTz */
-  USART_SendData(USARTy, 0x102);
+    /* Send the address mark (0x102) to wakeup USARTz */
+    USART_SendData( USARTy, 0x102 );
 
-  /* Wait while USARTy TXE = 0 */
-  while(USART_GetFlagStatus(USARTy, USART_FLAG_TXE) == RESET)
-  {
-  }
+    /* Wait while USARTy TXE = 0 */
+    while( USART_GetFlagStatus( USARTy, USART_FLAG_TXE ) == RESET )
+    {
+    }
 
-  /* Clear EXTI Line 0 Pending Bit */
-  EXTI_ClearITPendingBit(EXTI_Line0);
+    /* Clear EXTI Line 0 Pending Bit */
+    EXTI_ClearITPendingBit( EXTI_Line0 );
 }
 
 /**
@@ -169,19 +169,19 @@ void EXTI0_IRQHandler(void)
   * @param  None
   * @retval None
   */
-void EXTI9_5_IRQHandler(void)
+void EXTI9_5_IRQHandler( void )
 {
-  if(EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
-  {
-    /* Flush DR register and clear the USARTz RXNE flag */
-    USART_ReceiveData(USARTz);
+    if( EXTI_GetITStatus( KEY_BUTTON_EXTI_LINE ) != RESET )
+    {
+        /* Flush DR register and clear the USARTz RXNE flag */
+        USART_ReceiveData( USARTz );
 
-    /* Enable the USARTz mute mode*/
-    USART_ReceiverWakeUpCmd(USARTz, ENABLE);
+        /* Enable the USARTz mute mode*/
+        USART_ReceiverWakeUpCmd( USARTz, ENABLE );
 
-    /* Clear Key Button EXTI Line Pending Bit */
-    EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE); 
-  }
+        /* Clear Key Button EXTI Line Pending Bit */
+        EXTI_ClearITPendingBit( KEY_BUTTON_EXTI_LINE );
+    }
 }
 
 /******************************************************************************/
@@ -202,10 +202,10 @@ void EXTI9_5_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FSMC/SRAM_DataMemory/main.c 
+  * @file    FSMC/SRAM_DataMemory/main.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -17,7 +17,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -28,7 +28,7 @@
 
 /** @addtogroup FSMC_SRAM_DataMemory
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -45,29 +45,29 @@ __IO uint32_t TabAddr, MSPValue = 0;
   * @param  None
   * @retval None
   */
-int main(void)
+int main( void )
 {
-  /*!< At this stage the microcontroller clock setting is already configured, 
-       this is done through SystemInit() function which is called from startup
-       file (startup_stm32f10x_xx.s) before to branch to application main.
-       To reconfigure the default setting of SystemInit() function, refer to
-       system_stm32f10x.c file
-     */     
+    /*!< At this stage the microcontroller clock setting is already configured,
+         this is done through SystemInit() function which is called from startup
+         file (startup_stm32f10x_xx.s) before to branch to application main.
+         To reconfigure the default setting of SystemInit() function, refer to
+         system_stm32f10x.c file
+       */
 
-  for (Index = 0; Index <1024 ; Index++)
-  {
-     Tab[Index] =Index;
-  }
+    for( Index = 0; Index < 1024 ; Index++ )
+    {
+        Tab[Index] = Index;
+    }
 
-  TabAddr = (uint32_t)Tab; /* should be 0x680xxxxx */
+    TabAddr = ( uint32_t )Tab; /* should be 0x680xxxxx */
 
-  /* Get main stack pointer value */
-  MSPValue = __get_MSP(); /* should be 0x680xxxxx */
+    /* Get main stack pointer value */
+    MSPValue = __get_MSP(); /* should be 0x680xxxxx */
 
-  /* Infinite loop */
-  while (1)
-  {
-  }
+    /* Infinite loop */
+    while( 1 )
+    {
+    }
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -79,25 +79,25 @@ int main(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
-{ 
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+void assert_failed( uint8_t *file, uint32_t line )
+{
+    /* User can add his own implementation to report the file name and line number,
+       ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
-  /* Infinite loop */
-  while (1)
-  {
-  }
+    /* Infinite loop */
+    while( 1 )
+    {
+    }
 }
 
 #endif
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

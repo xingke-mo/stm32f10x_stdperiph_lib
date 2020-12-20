@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    11-March-2011
-  * @brief   This file contains all the functions prototypes for the BKP firmware 
+  * @brief   This file contains all the functions prototypes for the BKP firmware
   *          library.
   ******************************************************************************
   * @attention
@@ -25,7 +25,7 @@
 #define __STM32F10x_BKP_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -51,7 +51,7 @@
   * @{
   */
 
-/** @defgroup Tamper_Pin_active_level 
+/** @defgroup Tamper_Pin_active_level
   * @{
   */
 
@@ -63,7 +63,7 @@
   * @}
   */
 
-/** @defgroup RTC_output_source_to_output_on_the_Tamper_pin 
+/** @defgroup RTC_output_source_to_output_on_the_Tamper_pin
   * @{
   */
 
@@ -79,7 +79,7 @@
   * @}
   */
 
-/** @defgroup Data_Backup_Register 
+/** @defgroup Data_Backup_Register
   * @{
   */
 
@@ -162,18 +162,18 @@
   * @{
   */
 
-void BKP_DeInit(void);
-void BKP_TamperPinLevelConfig(uint16_t BKP_TamperPinLevel);
-void BKP_TamperPinCmd(FunctionalState NewState);
-void BKP_ITConfig(FunctionalState NewState);
-void BKP_RTCOutputConfig(uint16_t BKP_RTCOutputSource);
-void BKP_SetRTCCalibrationValue(uint8_t CalibrationValue);
-void BKP_WriteBackupRegister(uint16_t BKP_DR, uint16_t Data);
-uint16_t BKP_ReadBackupRegister(uint16_t BKP_DR);
-FlagStatus BKP_GetFlagStatus(void);
-void BKP_ClearFlag(void);
-ITStatus BKP_GetITStatus(void);
-void BKP_ClearITPendingBit(void);
+void BKP_DeInit( void );
+void BKP_TamperPinLevelConfig( uint16_t BKP_TamperPinLevel );
+void BKP_TamperPinCmd( FunctionalState NewState );
+void BKP_ITConfig( FunctionalState NewState );
+void BKP_RTCOutputConfig( uint16_t BKP_RTCOutputSource );
+void BKP_SetRTCCalibrationValue( uint8_t CalibrationValue );
+void BKP_WriteBackupRegister( uint16_t BKP_DR, uint16_t Data );
+uint16_t BKP_ReadBackupRegister( uint16_t BKP_DR );
+FlagStatus BKP_GetFlagStatus( void );
+void BKP_ClearFlag( void );
+ITStatus BKP_GetITStatus( void );
+void BKP_ClearITPendingBit( void );
 
 #ifdef __cplusplus
 }

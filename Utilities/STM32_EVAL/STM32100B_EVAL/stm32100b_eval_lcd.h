@@ -17,15 +17,15 @@
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32100B_EVAL_LCD_H
 #define __STM32100B_EVAL_LCD_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -35,93 +35,93 @@
 /** @addtogroup Utilities
   * @{
   */
-  
+
 /** @addtogroup STM32_EVAL
   * @{
-  */ 
+  */
 
 /** @addtogroup STM32100B_EVAL
   * @{
   */
-  
+
 /** @addtogroup STM32100B_EVAL_LCD
   * @{
-  */ 
+  */
 
 
 /** @defgroup STM32100B_EVAL_LCD_Exported_Types
   * @{
-  */ 
-typedef struct 
+  */
+typedef struct
 {
-  int16_t X;
-  int16_t Y;
+    int16_t X;
+    int16_t Y;
 } Point, * pPoint;
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM32100B_EVAL_LCD_Exported_Constants
   * @{
-  */ 
+  */
 
 /**
  * @brief Uncomment the line below if you want to use LCD_DrawBMP function to
  *        display a bitmap picture on the LCD. This function assumes that the bitmap
  *        file is loaded in the SPI Flash (mounted on STM32100B-EVAL board), however
- *        user can tailor it according to his application hardware requirement.     
+ *        user can tailor it according to his application hardware requirement.
  */
 /*#define USE_LCD_DrawBMP*/
 
 /**
  * @brief Uncomment the line below if you want to use user defined Delay function
  *        (for precise timing), otherwise default _delay_ function defined within
- *         this driver is used (less precise timing).  
+ *         this driver is used (less precise timing).
  */
 /* #define USE_Delay */
 
 #ifdef USE_Delay
 #include "main.h"
- 
-  #define _delay_     Delay  /* !< User can provide more timing precise _delay_ function
+
+#define _delay_     Delay  /* !< User can provide more timing precise _delay_ function
                                    (with 10ms time base), using SysTick for example */
 #else
-  #define _delay_     delay      /* !< Default _delay_ function with less precise timing */
-#endif                                     
+#define _delay_     delay      /* !< Default _delay_ function with less precise timing */
+#endif
 
 
-/** 
-  * @brief  LCD Control pins  
-  */ 
-#define LCD_NCS_PIN             GPIO_Pin_2                  
-#define LCD_NCS_GPIO_PORT       GPIOB                       
-#define LCD_NCS_GPIO_CLK        RCC_APB2Periph_GPIOB  
+/**
+  * @brief  LCD Control pins
+  */
+#define LCD_NCS_PIN             GPIO_Pin_2
+#define LCD_NCS_GPIO_PORT       GPIOB
+#define LCD_NCS_GPIO_CLK        RCC_APB2Periph_GPIOB
 #define LCD_NWR_PIN             GPIO_Pin_15
 #define LCD_NWR_GPIO_PORT       GPIOD
 #define LCD_NWR_GPIO_CLK        RCC_APB2Periph_GPIOD
-#define LCD_RS_PIN              GPIO_Pin_7                     
+#define LCD_RS_PIN              GPIO_Pin_7
 #define LCD_RS_GPIO_PORT        GPIOD
-#define LCD_RS_GPIO_CLK         RCC_APB2Periph_GPIOD 
+#define LCD_RS_GPIO_CLK         RCC_APB2Periph_GPIOD
 
-/** 
-  * @brief  LCD SPI Interface pins 
-  */ 
-#define LCD_SPI			            SPI2
-#define LCD_SPI_CLK		          RCC_APB1Periph_SPI2
-#define LCD_SPI_SCK_PIN         GPIO_Pin_13                 
-#define LCD_SPI_SCK_GPIO_PORT   GPIOB                       
-#define LCD_SPI_SCK_GPIO_CLK    RCC_APB2Periph_GPIOB  
-#define LCD_SPI_MISO_PIN        GPIO_Pin_14                 
-#define LCD_SPI_MISO_GPIO_PORT  GPIOB                       
-#define LCD_SPI_MISO_GPIO_CLK   RCC_APB2Periph_GPIOB  
-#define LCD_SPI_MOSI_PIN        GPIO_Pin_15                 
-#define LCD_SPI_MOSI_GPIO_PORT  GPIOB                       
-#define LCD_SPI_MOSI_GPIO_CLK   RCC_APB2Periph_GPIOB  
+/**
+  * @brief  LCD SPI Interface pins
+  */
+#define LCD_SPI                     SPI2
+#define LCD_SPI_CLK               RCC_APB1Periph_SPI2
+#define LCD_SPI_SCK_PIN         GPIO_Pin_13
+#define LCD_SPI_SCK_GPIO_PORT   GPIOB
+#define LCD_SPI_SCK_GPIO_CLK    RCC_APB2Periph_GPIOB
+#define LCD_SPI_MISO_PIN        GPIO_Pin_14
+#define LCD_SPI_MISO_GPIO_PORT  GPIOB
+#define LCD_SPI_MISO_GPIO_CLK   RCC_APB2Periph_GPIOB
+#define LCD_SPI_MOSI_PIN        GPIO_Pin_15
+#define LCD_SPI_MOSI_GPIO_PORT  GPIOB
+#define LCD_SPI_MOSI_GPIO_CLK   RCC_APB2Periph_GPIOB
 
 
-/** 
-  * @brief  LCD Registers  
-  */ 
+/**
+  * @brief  LCD Registers
+  */
 #define LCD_REG_0             0x00
 #define LCD_REG_1             0x01
 #define LCD_REG_2             0x02
@@ -235,9 +235,9 @@ typedef struct
 #define LCD_REG_239           0xEF
 
 
-/** 
-  * @brief  LCD color  
-  */ 
+/**
+  * @brief  LCD color
+  */
 #define LCD_COLOR_WHITE          0xFFFF
 #define LCD_COLOR_BLACK          0x0000
 #define LCD_COLOR_GREY           0xF7DE
@@ -249,8 +249,8 @@ typedef struct
 #define LCD_COLOR_CYAN           0x7FFF
 #define LCD_COLOR_YELLOW         0xFFE0
 
-/** 
-  * @brief  LCD Lines depending on the chosen fonts.  
+/**
+  * @brief  LCD Lines depending on the chosen fonts.
   */
 #define LCD_LINE_0               LINE(0)
 #define LCD_LINE_1               LINE(1)
@@ -284,89 +284,89 @@ typedef struct
 #define LCD_LINE_29              LINE(29)
 
 
-/** 
-  * @brief LCD default font 
-  */ 
+/**
+  * @brief LCD default font
+  */
 #define LCD_DEFAULT_FONT         Font16x24
 
-/** 
-  * @brief  LCD Direction  
-  */ 
+/**
+  * @brief  LCD Direction
+  */
 #define LCD_DIR_HORIZONTAL       0x0000
 #define LCD_DIR_VERTICAL         0x0001
 
-/** 
-  * @brief  LCD Size (Width and Height)  
-  */ 
+/**
+  * @brief  LCD Size (Width and Height)
+  */
 #define LCD_PIXEL_WIDTH          0x0140
 #define LCD_PIXEL_HEIGHT         0x00F0
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM32100B_EVAL_LCD_Exported_Macros
   * @{
-  */ 
-#define ASSEMBLE_RGB(R, G, B)    ((((R)& 0xF8) << 8) | (((G) & 0xFC) << 3) | (((B) & 0xF8) >> 3)) 
+  */
+#define ASSEMBLE_RGB(R, G, B)    ((((R)& 0xF8) << 8) | (((G) & 0xFC) << 3) | (((B) & 0xF8) >> 3))
 
 /**
   * @}
-  */ 
+  */
 
 /** @defgroup STM32100B_EVAL_LCD_Exported_Functions
   * @{
-  */ 
-void LCD_DeInit(void);
-void LCD_Setup(void);
-void STM32100B_LCD_Init(void);
-void LCD_SetColors(__IO uint16_t _TextColor, __IO uint16_t _BackColor); 
-void LCD_GetColors(__IO uint16_t *_TextColor, __IO uint16_t *_BackColor); 
-void LCD_SetTextColor(__IO uint16_t Color);
-void LCD_SetBackColor(__IO uint16_t Color);
-void LCD_ClearLine(uint8_t Line);
-void LCD_Clear(uint16_t Color);
-void LCD_SetCursor(uint8_t Xpos, uint16_t Ypos);
-void LCD_DrawChar(uint8_t Xpos, uint16_t Ypos, const uint16_t *c);
-void LCD_DisplayChar(uint8_t Line, uint16_t Column, uint8_t Ascii);
-void LCD_SetFont(sFONT *fonts);
-sFONT *LCD_GetFont(void);
-void LCD_DisplayStringLine(uint8_t Line, uint8_t *ptr);
-void LCD_SetDisplayWindow(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width);
-void LCD_WindowModeDisable(void);
-void LCD_DrawLine(uint8_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Direction);
-void LCD_DrawRect(uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width);
-void LCD_DrawCircle(uint8_t Xpos, uint16_t Ypos, uint16_t Radius);
-void LCD_DrawMonoPict(const uint32_t *Pict);
-void LCD_DrawBMP(uint32_t BmpAddress);
-void LCD_DrawUniLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
-void LCD_DrawFullRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
-void LCD_DrawFullCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius);
-void LCD_PolyLine(pPoint Points, uint16_t PointCount);
-void LCD_PolyLineRelative(pPoint Points, uint16_t PointCount);
-void LCD_ClosedPolyLine(pPoint Points, uint16_t PointCount);
-void LCD_ClosedPolyLineRelative(pPoint Points, uint16_t PointCount);
-void LCD_FillPolyLine(pPoint Points, uint16_t PointCount);
-void LCD_nCS_StartByte(uint8_t Start_Byte);
-void LCD_WriteRegIndex(uint8_t LCD_Reg);
-void LCD_WriteReg(uint8_t LCD_Reg, uint16_t LCD_RegValue);
-void LCD_WriteRAM_Prepare(void);
-void LCD_WriteRAMWord(uint16_t RGB_Code);
-uint16_t LCD_ReadReg(uint8_t LCD_Reg);
-void LCD_WriteRAM(uint16_t RGB_Code);
-void LCD_PowerOn(void);
-void LCD_DisplayOn(void);
-void LCD_DisplayOff(void);
+  */
+void LCD_DeInit( void );
+void LCD_Setup( void );
+void STM32100B_LCD_Init( void );
+void LCD_SetColors( __IO uint16_t _TextColor, __IO uint16_t _BackColor );
+void LCD_GetColors( __IO uint16_t *_TextColor, __IO uint16_t *_BackColor );
+void LCD_SetTextColor( __IO uint16_t Color );
+void LCD_SetBackColor( __IO uint16_t Color );
+void LCD_ClearLine( uint8_t Line );
+void LCD_Clear( uint16_t Color );
+void LCD_SetCursor( uint8_t Xpos, uint16_t Ypos );
+void LCD_DrawChar( uint8_t Xpos, uint16_t Ypos, const uint16_t *c );
+void LCD_DisplayChar( uint8_t Line, uint16_t Column, uint8_t Ascii );
+void LCD_SetFont( sFONT *fonts );
+sFONT *LCD_GetFont( void );
+void LCD_DisplayStringLine( uint8_t Line, uint8_t *ptr );
+void LCD_SetDisplayWindow( uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width );
+void LCD_WindowModeDisable( void );
+void LCD_DrawLine( uint8_t Xpos, uint16_t Ypos, uint16_t Length, uint8_t Direction );
+void LCD_DrawRect( uint8_t Xpos, uint16_t Ypos, uint8_t Height, uint16_t Width );
+void LCD_DrawCircle( uint8_t Xpos, uint16_t Ypos, uint16_t Radius );
+void LCD_DrawMonoPict( const uint32_t *Pict );
+void LCD_DrawBMP( uint32_t BmpAddress );
+void LCD_DrawUniLine( uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2 );
+void LCD_DrawFullRect( uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height );
+void LCD_DrawFullCircle( uint16_t Xpos, uint16_t Ypos, uint16_t Radius );
+void LCD_PolyLine( pPoint Points, uint16_t PointCount );
+void LCD_PolyLineRelative( pPoint Points, uint16_t PointCount );
+void LCD_ClosedPolyLine( pPoint Points, uint16_t PointCount );
+void LCD_ClosedPolyLineRelative( pPoint Points, uint16_t PointCount );
+void LCD_FillPolyLine( pPoint Points, uint16_t PointCount );
+void LCD_nCS_StartByte( uint8_t Start_Byte );
+void LCD_WriteRegIndex( uint8_t LCD_Reg );
+void LCD_WriteReg( uint8_t LCD_Reg, uint16_t LCD_RegValue );
+void LCD_WriteRAM_Prepare( void );
+void LCD_WriteRAMWord( uint16_t RGB_Code );
+uint16_t LCD_ReadReg( uint8_t LCD_Reg );
+void LCD_WriteRAM( uint16_t RGB_Code );
+void LCD_PowerOn( void );
+void LCD_DisplayOn( void );
+void LCD_DisplayOff( void );
 
 
-void LCD_CtrlLinesConfig(void);
-void LCD_CtrlLinesWrite(GPIO_TypeDef* GPIOx, uint16_t CtrlPins, BitAction BitVal);
-void LCD_SPIConfig(void);
+void LCD_CtrlLinesConfig( void );
+void LCD_CtrlLinesWrite( GPIO_TypeDef *GPIOx, uint16_t CtrlPins, BitAction BitVal );
+void LCD_SPIConfig( void );
 
 /**
   * @}
-  */ 
-  
+  */
+
 #ifdef __cplusplus
 }
 #endif
@@ -376,18 +376,18 @@ void LCD_SPIConfig(void);
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */   
-  
+  */
+
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

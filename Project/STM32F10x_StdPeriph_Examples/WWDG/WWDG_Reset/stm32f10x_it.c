@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    WWDG/WWDG_Reset/stm32f10x_it.c 
+  * @file    WWDG/WWDG_Reset/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -51,7 +51,7 @@ extern __IO uint32_t TimingDelay;
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -60,11 +60,11 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -72,11 +72,11 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -84,11 +84,11 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -96,11 +96,11 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {}
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {}
 }
 
 /**
@@ -108,7 +108,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -117,7 +117,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -126,7 +126,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -135,9 +135,9 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
-  TimingDelay--;
+    TimingDelay--;
 }
 
 /******************************************************************************/
@@ -149,18 +149,18 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void EXTI9_5_IRQHandler(void)
+void EXTI9_5_IRQHandler( void )
 {
-  if (EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
-  {  
-    /* Clear the Key Button EXTI Line Pending Bit */
-    EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
-    
-    /* As the following address is invalid (not mapped), a Hardfault exception
-	  will be generated with an infinite loop and when the WWDG counter falls to 63
-    the WWDG reset occurs */
- 	  *(__IO uint32_t *) 0x000000FF = 0xFF;
-  }
+    if( EXTI_GetITStatus( KEY_BUTTON_EXTI_LINE ) != RESET )
+    {
+        /* Clear the Key Button EXTI Line Pending Bit */
+        EXTI_ClearITPendingBit( KEY_BUTTON_EXTI_LINE );
+
+        /* As the following address is invalid (not mapped), a Hardfault exception
+          will be generated with an infinite loop and when the WWDG counter falls to 63
+        the WWDG reset occurs */
+        *( __IO uint32_t * ) 0x000000FF = 0xFF;
+    }
 }
 
 /******************************************************************************/
@@ -182,10 +182,10 @@ void EXTI9_5_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

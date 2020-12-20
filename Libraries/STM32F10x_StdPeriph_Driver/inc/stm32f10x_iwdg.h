@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    11-March-2011
-  * @brief   This file contains all the functions prototypes for the IWDG 
+  * @brief   This file contains all the functions prototypes for the IWDG
   *          firmware library.
   ******************************************************************************
   * @attention
@@ -25,7 +25,7 @@
 #define __STM32F10x_IWDG_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -63,7 +63,7 @@
   * @}
   */
 
-/** @defgroup IWDG_prescaler 
+/** @defgroup IWDG_prescaler
   * @{
   */
 
@@ -85,7 +85,7 @@
   * @}
   */
 
-/** @defgroup IWDG_Flag 
+/** @defgroup IWDG_Flag
   * @{
   */
 
@@ -113,12 +113,12 @@
   * @{
   */
 
-void IWDG_WriteAccessCmd(uint16_t IWDG_WriteAccess);
-void IWDG_SetPrescaler(uint8_t IWDG_Prescaler);
-void IWDG_SetReload(uint16_t Reload);
-void IWDG_ReloadCounter(void);
-void IWDG_Enable(void);
-FlagStatus IWDG_GetFlagStatus(uint16_t IWDG_FLAG);
+void IWDG_WriteAccessCmd( uint16_t IWDG_WriteAccess );
+void IWDG_SetPrescaler( uint8_t IWDG_Prescaler );
+void IWDG_SetReload( uint16_t Reload );
+void IWDG_ReloadCounter( void );
+void IWDG_Enable( void );
+FlagStatus IWDG_GetFlagStatus( uint16_t IWDG_FLAG );
 
 #ifdef __cplusplus
 }

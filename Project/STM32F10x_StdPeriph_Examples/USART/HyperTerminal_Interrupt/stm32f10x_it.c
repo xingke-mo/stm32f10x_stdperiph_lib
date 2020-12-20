@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    USART/HyperTerminal_Interrupt/stm32f10x_it.c 
+  * @file    USART/HyperTerminal_Interrupt/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -31,14 +31,14 @@
 
 /** @addtogroup USART_HyperTerminal_Interrupt
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #ifdef USE_STM3210C_EVAL
-  #define USARTx_IRQHandler   USART2_IRQHandler
+    #define USARTx_IRQHandler   USART2_IRQHandler
 #else
-  #define USARTx_IRQHandler   USART1_IRQHandler
+    #define USARTx_IRQHandler   USART1_IRQHandler
 #endif
 
 #define TxBufferSize   (countof(TxBuffer) - 1)
@@ -53,8 +53,8 @@ uint8_t TxBuffer[] = "\n\rUSART Hyperterminal Interrupts Example: USART-Hyperter
 uint8_t RxBuffer[RxBufferSize];
 uint8_t NbrOfDataToTransfer = TxBufferSize;
 uint8_t NbrOfDataToRead = RxBufferSize;
-uint8_t TxCounter = 0; 
-uint16_t RxCounter = 0; 
+uint8_t TxCounter = 0;
+uint16_t RxCounter = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -68,7 +68,7 @@ uint16_t RxCounter = 0;
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -77,12 +77,12 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -90,12 +90,12 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -103,12 +103,12 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -116,12 +116,12 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -129,7 +129,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -138,7 +138,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -147,7 +147,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -156,7 +156,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -169,31 +169,31 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void USARTx_IRQHandler(void)
+void USARTx_IRQHandler( void )
 {
-  if(USART_GetITStatus(EVAL_COM1, USART_IT_RXNE) != RESET)
-  {
-    /* Read one byte from the receive data register */
-    RxBuffer[RxCounter++] = (USART_ReceiveData(EVAL_COM1) & 0x7F);
-
-    if(RxCounter == NbrOfDataToRead)
+    if( USART_GetITStatus( EVAL_COM1, USART_IT_RXNE ) != RESET )
     {
-      /* Disable the EVAL_COM1 Receive interrupt */
-      USART_ITConfig(EVAL_COM1, USART_IT_RXNE, DISABLE);
+        /* Read one byte from the receive data register */
+        RxBuffer[RxCounter++] = ( USART_ReceiveData( EVAL_COM1 ) & 0x7F );
+
+        if( RxCounter == NbrOfDataToRead )
+        {
+            /* Disable the EVAL_COM1 Receive interrupt */
+            USART_ITConfig( EVAL_COM1, USART_IT_RXNE, DISABLE );
+        }
     }
-  }
 
-  if(USART_GetITStatus(EVAL_COM1, USART_IT_TXE) != RESET)
-  {   
-    /* Write one byte to the transmit data register */
-    USART_SendData(EVAL_COM1, TxBuffer[TxCounter++]);
-
-    if(TxCounter == NbrOfDataToTransfer)
+    if( USART_GetITStatus( EVAL_COM1, USART_IT_TXE ) != RESET )
     {
-      /* Disable the EVAL_COM1 Transmit interrupt */
-      USART_ITConfig(EVAL_COM1, USART_IT_TXE, DISABLE);
+        /* Write one byte to the transmit data register */
+        USART_SendData( EVAL_COM1, TxBuffer[TxCounter++] );
+
+        if( TxCounter == NbrOfDataToTransfer )
+        {
+            /* Disable the EVAL_COM1 Transmit interrupt */
+            USART_ITConfig( EVAL_COM1, USART_IT_TXE, DISABLE );
+        }
     }
-  }
 }
 
 /******************************************************************************/
@@ -214,10 +214,10 @@ void USARTx_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

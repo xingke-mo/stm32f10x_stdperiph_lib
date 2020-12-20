@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    ADC/TIMTrigger_AutoInjection/stm32f10x_it.c 
+  * @file    ADC/TIMTrigger_AutoInjection/stm32f10x_it.c
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -19,7 +19,7 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -30,7 +30,7 @@
 
 /** @addtogroup ADC_TIMTrigger_AutoInjection
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,7 +51,7 @@ __IO uint32_t Index;
   * @param  None
   * @retval None
   */
-void NMI_Handler(void)
+void NMI_Handler( void )
 {
 }
 
@@ -60,12 +60,12 @@ void NMI_Handler(void)
   * @param  None
   * @retval None
   */
-void HardFault_Handler(void)
+void HardFault_Handler( void )
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Hard Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -73,12 +73,12 @@ void HardFault_Handler(void)
   * @param  None
   * @retval None
   */
-void MemManage_Handler(void)
+void MemManage_Handler( void )
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Memory Manage exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -86,12 +86,12 @@ void MemManage_Handler(void)
   * @param  None
   * @retval None
   */
-void BusFault_Handler(void)
+void BusFault_Handler( void )
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Bus Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -99,12 +99,12 @@ void BusFault_Handler(void)
   * @param  None
   * @retval None
   */
-void UsageFault_Handler(void)
+void UsageFault_Handler( void )
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
-  while (1)
-  {
-  }
+    /* Go to infinite loop when Usage Fault exception occurs */
+    while( 1 )
+    {
+    }
 }
 
 /**
@@ -112,7 +112,7 @@ void UsageFault_Handler(void)
   * @param  None
   * @retval None
   */
-void SVC_Handler(void)
+void SVC_Handler( void )
 {
 }
 
@@ -121,7 +121,7 @@ void SVC_Handler(void)
   * @param  None
   * @retval None
   */
-void DebugMon_Handler(void)
+void DebugMon_Handler( void )
 {
 }
 
@@ -130,7 +130,7 @@ void DebugMon_Handler(void)
   * @param  None
   * @retval None
   */
-void PendSV_Handler(void)
+void PendSV_Handler( void )
 {
 }
 
@@ -139,7 +139,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+void SysTick_Handler( void )
 {
 }
 
@@ -153,19 +153,19 @@ void SysTick_Handler(void)
   * @retval None
   */
 #if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || defined (STM32F10X_HD_VL)
-void ADC1_IRQHandler(void)
+    void ADC1_IRQHandler( void )
 #else
-void ADC1_2_IRQHandler(void)
+    void ADC1_2_IRQHandler( void )
 #endif
 {
-  /* Set PC.06 pin */
-  GPIO_WriteBit(GPIOC, GPIO_Pin_6, Bit_SET);
-  /* Get injected channel11 converted value */
-  ADC_InjectedConvertedValueTab[Index++] = ADC_GetInjectedConversionValue(ADC1, ADC_InjectedChannel_1);
-  /* Clear ADC1 JEOC pending interrupt bit */
-  ADC_ClearITPendingBit(ADC1, ADC_IT_JEOC);
-  /* Reset PC.06 pin */
-  GPIO_WriteBit(GPIOC, GPIO_Pin_6, Bit_RESET);
+    /* Set PC.06 pin */
+    GPIO_WriteBit( GPIOC, GPIO_Pin_6, Bit_SET );
+    /* Get injected channel11 converted value */
+    ADC_InjectedConvertedValueTab[Index++] = ADC_GetInjectedConversionValue( ADC1, ADC_InjectedChannel_1 );
+    /* Clear ADC1 JEOC pending interrupt bit */
+    ADC_ClearITPendingBit( ADC1, ADC_IT_JEOC );
+    /* Reset PC.06 pin */
+    GPIO_WriteBit( GPIOC, GPIO_Pin_6, Bit_RESET );
 }
 
 /******************************************************************************/
@@ -186,10 +186,10 @@ void ADC1_2_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

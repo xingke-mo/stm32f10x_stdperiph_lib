@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    NVIC/VectorTable_Relocation/main.h 
+  * @file    NVIC/VectorTable_Relocation/main.h
   * @author  MCD Application Team
   * @version V3.5.0
   * @date    08-April-2011
@@ -31,7 +31,7 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-void TimingDelay_Decrement(void);
+void TimingDelay_Decrement( void );
 
 #endif /* __MAIN_H */
 
